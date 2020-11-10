@@ -8,6 +8,7 @@ import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import com.osmosoft.cryptoshield.R
 import com.osmosoft.cryptoshield.common.AbstractTextWatcher
+import com.osmosoft.cryptoshield.crypto.utils.AESCipher
 import com.osmosoft.cryptoshield.crypto.utils.CryptoUtils
 
 private const val TAG = "AuthActivityTag"
@@ -21,18 +22,24 @@ class AuthActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_auth)
 
-        Log.d(TAG,CryptoUtils().toMD5Hash("hello"))
+        val msg = "hello"
+        val key = "123"
 
-        passwordEditText = findViewById(R.id.activity_auth_password_edit_text)
-        continueButton = findViewById(R.id.activity_auth_continue_button)
+        val enc = AESCipher.encrypt(msg,key)
+        val dec = AESCipher.decrypt(enc,key)
+        Log.d("TAG_ENC",enc)
+        Log.d("TAG_DEC",dec)
 
-        //validate user input
-        passwordEditText.addTextChangedListener(object: AbstractTextWatcher(){
-            override fun afterTextChanged(s: Editable?) {
-                    continueButton.isEnabled = s.toString().isNotEmpty() and s.toString().isNotBlank()
-
-            }
-        })
+//        passwordEditText = findViewById(R.id.activity_auth_password_edit_text)
+//        continueButton = findViewById(R.id.activity_auth_continue_button)
+//
+//        //validate user input
+//        passwordEditText.addTextChangedListener(object: AbstractTextWatcher(){
+//            override fun afterTextChanged(s: Editable?) {
+//                    continueButton.isEnabled = s.toString().isNotEmpty() and s.toString().isNotBlank()
+//
+//            }
+//        })
 
     }
 
