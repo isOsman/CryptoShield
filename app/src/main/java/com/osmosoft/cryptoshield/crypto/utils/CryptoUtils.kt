@@ -3,7 +3,8 @@ package com.osmosoft.cryptoshield.crypto.utils
 import java.security.MessageDigest
 import kotlin.text.Charsets.UTF_8
 
- class CryptoUtils {
+//object - is a singleton pattern implemented on language level
+ object CryptoUtils {
 
      //return a digest(checksum) byte array
     private fun md5(str: String): ByteArray = MessageDigest.getInstance("MD5").digest(str.toByteArray(UTF_8))
