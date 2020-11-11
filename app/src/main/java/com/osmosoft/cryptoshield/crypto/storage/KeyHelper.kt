@@ -204,7 +204,7 @@ object KeyHelper {
     }
 
     //generate and save random init vector for AES-cipher
-    fun generateRandomVI(context: Context){
+    private fun generateRandomVI(context: Context){
         Log.d(TAG, "generateRandomVI")
         val pref: SharedPreferences = getAppSharedPrefs(context)
         val publicIV: String? = pref.getString(PUBLIC_IV,null)
@@ -221,7 +221,7 @@ object KeyHelper {
     }
 
     //return local(app) shared preferences
-    fun getAppSharedPrefs(context: Context): SharedPreferences{
+    private fun getAppSharedPrefs(context: Context): SharedPreferences{
         return context.getSharedPreferences(
                 APP_SHARED_PREF,
                 Context.MODE_PRIVATE

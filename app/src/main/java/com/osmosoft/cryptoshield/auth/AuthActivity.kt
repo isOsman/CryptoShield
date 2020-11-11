@@ -25,6 +25,7 @@ class AuthActivity : AppCompatActivity() {
 
         KeyHelper.init(this)
 
+
 //        val msg = "hello"
 //        val key = CryptoUtils.toMD5Hash("key")
 //
