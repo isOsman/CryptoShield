@@ -1,7 +1,6 @@
 package com.osmosoft.cryptoshield.crypto.utils
 
 import android.util.Base64
-import com.osmosoft.cryptoshield.crypto.utils.CryptoUtils.toHex
 import javax.crypto.Cipher
 import javax.crypto.spec.SecretKeySpec
 

@@ -8,6 +8,7 @@ import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import com.osmosoft.cryptoshield.R
 import com.osmosoft.cryptoshield.common.AbstractTextWatcher
+import com.osmosoft.cryptoshield.crypto.storage.KeyHelper
 import com.osmosoft.cryptoshield.crypto.utils.AESCipher
 import com.osmosoft.cryptoshield.crypto.utils.CryptoUtils
 
@@ -22,13 +23,15 @@ class AuthActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_auth)
 
-        val msg = "hello"
-        val key = "123"
+        KeyHelper.init(this)
 
-        val enc = AESCipher.encrypt(msg,key)
-        val dec = AESCipher.decrypt(enc,key)
-        Log.d("TAG_ENC",enc)
-        Log.d("TAG_DEC",dec)
+//        val msg = "hello"
+//        val key = CryptoUtils.toMD5Hash("key")
+//
+//        val enc = AESCipher.encrypt(msg,key)
+//        val dec = AESCipher.decrypt(enc,key)
+//        Log.d("TAG_ENC",enc)
+//        Log.d("TAG_DEC",dec)
 
 //        passwordEditText = findViewById(R.id.activity_auth_password_edit_text)
 //        continueButton = findViewById(R.id.activity_auth_continue_button)
