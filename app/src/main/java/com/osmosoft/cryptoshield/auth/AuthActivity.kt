@@ -11,6 +11,8 @@ import com.osmosoft.cryptoshield.common.AbstractTextWatcher
 import com.osmosoft.cryptoshield.crypto.storage.KeyHelper
 import com.osmosoft.cryptoshield.crypto.utils.AESCipher
 import com.osmosoft.cryptoshield.crypto.utils.CryptoUtils
+import com.osmosoft.cryptoshield.data.UserDataManager
+import kotlin.math.log
 
 private const val TAG = "AuthActivityTag"
 
@@ -23,17 +25,21 @@ class AuthActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_auth)
 
-        KeyHelper.init(this)
+        var set = UserDataManager.getInstance(this)
+                .init()
+                .getUserDataSet()
 
+        Log.d(TAG, "onCreate: set: $set")
+        UserDataManager.getInstance(this).add("test1")
+        set = UserDataManager.getInstance(this).getUserDataSet()
+        Log.d(TAG, "onCreate: set: $set")
+        UserDataManager.getInstance(this).add("test1")
+        set = UserDataManager.getInstance(this).getUserDataSet()
+        Log.d(TAG, "onCreate: set: $set")
+        UserDataManager.getInstance(this).remove("test1")
+        set = UserDataManager.getInstance(this).getUserDataSet()
+        Log.d(TAG, "onCreate: set: $set")
 
-
-//        val msg = "hello"
-//        val key = CryptoUtils.toMD5Hash("key")
-//
-//        val enc = AESCipher.encrypt(msg,key)
-//        val dec = AESCipher.decrypt(enc,key)
-//        Log.d("TAG_ENC",enc)
-//        Log.d("TAG_DEC",dec)
 
 //        passwordEditText = findViewById(R.id.activity_auth_password_edit_text)
 //        continueButton = findViewById(R.id.activity_auth_continue_button)
