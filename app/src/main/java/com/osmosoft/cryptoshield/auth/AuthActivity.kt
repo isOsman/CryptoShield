@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.osmosoft.cryptoshield.R
 import com.osmosoft.cryptoshield.data.UserAuthManager
@@ -19,8 +20,7 @@ class AuthActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_auth)
 
-        val auth = UserAuthManager.getInstance(this).auth("pass")
-        Log.d(TAG, "auth: $auth")
+
 
 //        passwordEditText = findViewById(R.id.activity_auth_password_edit_text)
 //        continueButton = findViewById(R.id.activity_auth_continue_button)
@@ -32,6 +32,14 @@ class AuthActivity : AppCompatActivity() {
 //
 //            }
 //        })
+
+//        user auth
+//         val auth = UserAuthManager.getInstance(this).auth("pa ss")
+//        if(auth){
+//            Toast.makeText(this,"OK",Toast.LENGTH_SHORT).show()
+//        }else{
+//            Toast.makeText(this,"Wrong password",Toast.LENGTH_SHORT).show()
+//        }
 
     }
 
