@@ -91,7 +91,7 @@ object KeyHelper {
         Log.d(TAG, "RSAEncrypt: received public key from keystore")
         Log.d(TAG, "RSAEncrypt: publicKey: ${privateKeyEntry.certificate.publicKey}")
         //encrypt the message(msg)
-        val inputCipher: Cipher = Cipher.getInstance(RSA_MODE, PROVIDER_ANDROID_OPEN_SSL)
+        val inputCipher: Cipher = Cipher.getInstance(RSA_MODE)
         inputCipher.init(Cipher.ENCRYPT_MODE,privateKeyEntry.certificate.publicKey)
         
         val outputStream: ByteArrayOutputStream = ByteArrayOutputStream()
@@ -112,7 +112,7 @@ object KeyHelper {
 
         Log.d(TAG, "RSADecrypt: received private key from keystore")
         Log.d(TAG, "RSADecrypt: privateKey: ${privateKeyEntry.privateKey}")
-        val outputCipher: Cipher = Cipher.getInstance(RSA_MODE, PROVIDER_ANDROID_OPEN_SSL)
+        val outputCipher: Cipher = Cipher.getInstance(RSA_MODE)
         outputCipher.init(Cipher.DECRYPT_MODE,privateKeyEntry.privateKey)
         val cipherInputStream: CipherInputStream = CipherInputStream(
                 ByteArrayInputStream(msg),

@@ -7,6 +7,7 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.osmosoft.cryptoshield.R
+import com.osmosoft.cryptoshield.crypto.storage.KeyHelper
 import com.osmosoft.cryptoshield.data.UserAuthManager
 
 private const val TAG = "AuthActivityTag"
@@ -20,6 +21,8 @@ class AuthActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_auth)
 
+//        KeyHelper.init(this)
+//        KeyHelper.encrypt(this,"sdf")
 
 
 //        passwordEditText = findViewById(R.id.activity_auth_password_edit_text)

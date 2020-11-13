@@ -4,6 +4,7 @@ import android.content.DialogInterface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.InputType
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
@@ -15,6 +16,7 @@ import com.osmosoft.cryptoshield.crypto.storage.KeyHelper
 import com.osmosoft.cryptoshield.data.UserDataConst
 import com.osmosoft.cryptoshield.data.UserDataManager
 import com.osmosoft.cryptoshield.presentation.adapters.UserDataAdapter
+import java.security.Key
 import kotlin.random.Random
 
 class UserDataActivity : AppCompatActivity() {
@@ -30,11 +32,13 @@ class UserDataActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_data)
 
+        KeyHelper.init(this)
 
-        val userDataSet = UserDataManager.getInstance(this).getUserDataSet()
+        val encUserDataSet = UserDataManager.getInstance(this).getUserDataSet()
+        val decUserDataSet = getDecUserDataSet(encUserDataSet)
 
         userDataAdapter = UserDataAdapter()
-        userDataAdapter.setUserDataSet(userDataSet)
+        userDataAdapter.setUserDataSet(decUserDataSet)
 
         recyclerView = findViewById(R.id.activity_user_data_recycler_view)
         recyclerView.adapter = userDataAdapter
@@ -69,9 +73,12 @@ class UserDataActivity : AppCompatActivity() {
                     password = passwordInput.text.toString()
 
                     val data = resource + UserDataConst.lineDivider + password
-                    KeyHelper.init(this)
+                    Log.d("DATA_Activity", "data: $data")
                     val encData = KeyHelper.encrypt(this,data)
-                    userDataAdapter.addUserDataItem(encData)
+                    Log.d("DATA_Activity", "enc_data: $encData")
+                    val decData = KeyHelper.decrypt(this,encData)
+                    Log.d("DATA_Activity", "enc_data: $encData")
+                    userDataAdapter.addUserDataItem(data)
                 }
             }
 
@@ -84,5 +91,38 @@ class UserDataActivity : AppCompatActivity() {
 
         }
 
+    }
+
+    override fun onStop() {
+        saveUserDataSet()
+        super.onStop()
+    }
+
+    override fun onDestroy() {
+        saveUserDataSet()
+        super.onDestroy()
+    }
+
+    private fun saveUserDataSet(){
+        val encSet: MutableSet<String> = mutableSetOf()
+        val userDataSet: MutableSet<String> = userDataAdapter.getUserDataSet()
+        var encString: String
+        for(i in 0 until userDataSet.size){
+            encString = KeyHelper.encrypt(this,userDataSet.elementAt(i))
+            encSet.add(encString)
+        }
+
+        UserDataManager.getInstance(this).saveUserDataSet(encSet)
+    }
+
+    private fun getDecUserDataSet(encSet: MutableSet<String>): MutableSet<String>{
+        val decSet: MutableSet<String> = mutableSetOf()
+        var decString: String
+        for(i in 0 until encSet.size){
+            decString = KeyHelper.decrypt(this,encSet.elementAt(i))
+            decSet.add(decString)
+        }
+
+        return decSet
     }
 }
