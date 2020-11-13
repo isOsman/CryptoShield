@@ -4,15 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.UserDataActivity">
-
+    tools:context=".presentation.UserDataActivity"
+    android:padding="@dimen/padding_10x">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/activity_user_data_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/user_data_list_item"/>
+        tools:listitem="@layout/user_data_list_item" />
 
     <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/activity_user_data_image_button"
