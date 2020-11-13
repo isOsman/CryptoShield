@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.util.Log
 import com.osmosoft.cryptoshield.common.SingletonHolder
+import com.osmosoft.cryptoshield.crypto.storage.KeyHelper
 
 private const val TAG = "user_data_manager_tag"
 private const val USER_DATA_SHARED_PREF = "user_data_shared_pref"
@@ -20,6 +21,7 @@ class UserDataManager private constructor(private val context: Context){
         Log.d(TAG, "init: ${getUserDataList()}")
         return UserDataManager(context)
     }
+
 
     //add new item to the shared pref
     fun add(userData: String){
@@ -51,6 +53,12 @@ class UserDataManager private constructor(private val context: Context){
         //if set in shared pref is null, return empty set
         return set ?: mutableSetOf()
 
+    }
+
+    fun saveUserDataSet(userDataSet: MutableSet<String>){
+        getSharedPref().edit()
+            .putStringSet(USER_DATA_SET,userDataSet)
+            .apply()
     }
 
     //return local shared preferences
