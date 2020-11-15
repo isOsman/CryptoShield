@@ -3,4 +3,5 @@
     <string name="author">by osmosoft</string>
     <string name="enter_password">Введите пароль</string>
     <string name="title_continue">Продолжить</string>
+    <string name="wrong_password">Неверный пароль</string>
 </resources>
