@@ -15,8 +15,6 @@ class UserDataManager private constructor(private val context: Context){
     //allows use singleton
     companion object : SingletonHolder<UserDataManager,Context>(::UserDataManager)
 
-
-
     fun init(): UserDataManager{
         Log.d(TAG, "init: ${getUserDataList()}")
         return UserDataManager(context)
